@@ -1,5 +1,5 @@
 import { html, render } from 'https://unpkg.com/htm@3.1.1/preact/standalone.module.js'
-import { act, view, newState, buildPack, parseCSV, pools, draw, norm, active, topTied, NAMES, FLOW, T, vdVal } from './game.js'
+import { act, view, newState, buildPack, parseCSV, pools, draw, norm, active, topTied, NAMES, FLOW, T, vdVal, SUBJECTS, only, shortRounds } from './game.js'
 
 const CSV = 'https://lqtue.github.io/olympia-questions/questions.csv'
 const PREFIX = 'olympia-vn-room-'
@@ -18,7 +18,7 @@ const CID = (() => {
 const S = {
   screen: 'home', role: null, want: 'player', name: store.get('olympia-name') || '',
   code: location.hash.slice(1).toUpperCase(), status: '', game: null, slot: -1, off: 0,
-  rows: null, matches: [], setup: { match: '', key: '', img: '' }, viewers: [],
+  rows: null, matches: [], counts: {}, setup: { match: '', key: '', img: '', off: store.get('olympia-off') || [] }, viewers: [],
 }
 let G = null, peer = null, conn = null, retryT = 0
 const conns = new Map(), hist = []
@@ -132,7 +132,7 @@ function undo() {
   sync()
 }
 function reroll(row) {
-  const [q] = draw(pools(S.rows)[G.phase], 1, new Set([G.q?.qid]))
+  const [q] = draw(pools(only(S.rows, G.pack.off))[G.phase], 1, new Set([G.q?.qid]))
   if (q) doo({ type: 'reroll', q, row })
 }
 
@@ -144,7 +144,9 @@ async function loadCSV() {
       const l = m.get(r.season) || m.set(r.season, []).get(r.season)
       if (!l.includes(r.match)) l.push(r.match)
     }
-    set({ rows, matches: [...m] })
+    const counts = {}
+    for (const r of rows) counts[r.subject] = (counts[r.subject] || 0) + 1
+    set({ rows, matches: [...m], counts })
   } catch (e) {
     set({ status: `Không tải được kho câu hỏi: ${e.message}` })
   }
@@ -202,6 +204,12 @@ addEventListener('keydown', e => {
 const matchName = m =>
   m === 'Final' ? 'Chung kết năm'
     : m.replace(/^QF(\d)$/, 'Chung kết Quý $1').replace(/^W(\d)M(\d)Q(\d)$/, 'Tuần $1 · Tháng $2 · Quý $3').replace(/^M(\d)Q(\d)$/, 'Tháng $1 · Quý $2')
+
+function setOff(off) {
+  store.set('olympia-off', off)
+  set({ setup: { ...S.setup, off } })
+}
+const toggleSubject = k => setOff(S.setup.off.includes(k) ? S.setup.off.filter(x => x !== k) : [...S.setup.off, k])
 
 const App = () => (S.screen === 'home' ? Home() : Room())
 
@@ -304,6 +312,7 @@ function Lobby(g) {
     <p class="muted">${S.slot >= 0 ? `Bạn ngồi ghế số ${S.slot + 1}. Ở phần bấm chuông, nhấn nút lớn hoặc phím Space.` : 'Bạn đang theo dõi với tư cách khán giả. Phòng đã đủ thí sinh hoặc bạn chọn xem.'}</p>
   </section>`
   const link = `${location.origin}${location.pathname}#${g.code}`
+  const short = S.rows ? shortRounds(S.rows, S.setup.off) : []
   return html`<section class="lobby">
     <div class="panel">
       <h2>Mời người chơi</h2>
@@ -325,8 +334,20 @@ function Lobby(g) {
         </label>
         <label>Từ khoá chướng ngại vật<input value=${S.setup.key} placeholder="Bỏ trống để bốc ngẫu nhiên" onInput=${e => (S.setup.key = e.target.value)} /></label>
         <label>Ảnh chướng ngại vật (URL, không bắt buộc)<input value=${S.setup.img} placeholder="https://…" onInput=${e => (S.setup.img = e.target.value)} /></label>
+        <div class="cats">
+          <span class="muted small">Môn thi · bật ${Object.keys(SUBJECTS).filter(k => !S.setup.off.includes(k)).length}/${Object.keys(SUBJECTS).length}</span>
+          <div class="chips">${Object.entries(SUBJECTS).map(([k, v]) => html`
+            <button class=${cls('pill', !S.setup.off.includes(k) && 'on')} aria-pressed=${!S.setup.off.includes(k)} onClick=${() => toggleSubject(k)}>
+              ${v}<span class="n">${(S.counts[k] || 0).toLocaleString('vi-VN')}</span>
+            </button>`)}</div>
+          <div class="btns">
+            <button class="pill" onClick=${() => setOff([])}>Bật tất cả</button>
+            <button class="pill" onClick=${() => setOff(Object.keys(SUBJECTS))}>Tắt tất cả</button>
+          </div>
+          ${short.length > 0 && html`<p class="warn">Không đủ câu hỏi cho: ${short.map(k => NAMES[k]).join(', ')}. Hãy bật thêm môn.</p>`}
+        </div>
         <p class="muted small">Kho dữ liệu không có từ khoá và ảnh CNV nên người dẫn tự nhập. Vòng Tăng tốc được lược bỏ. Câu nào trận đã chọn thiếu sẽ được bốc ngẫu nhiên trong cùng vòng.</p>
-        <button class="pill primary wide" disabled=${!active(g).length} onClick=${start}>
+        <button class="pill primary wide" disabled=${!active(g).length || short.length > 0} onClick=${start}>
           ${active(g).length ? `Bắt đầu với ${active(g).length} thí sinh` : 'Cần ít nhất 1 thí sinh'}
         </button>`}
     </div>
@@ -345,7 +366,7 @@ function Clock(g) {
 function QCard(g, meta) {
   const q = g.q, see = q && (g.shown || isHost())
   return html`<article class="q">
-    <div class="qmeta"><span>${meta}</span>${see && html`<span>${q.subject} · ${q.qid}</span>`}</div>
+    <div class="qmeta"><span>${meta}</span>${see && html`<span>${SUBJECTS[q.subject] || q.subject} · ${q.qid}</span>`}</div>
     ${Clock(g)}
     <p class=${cls('qtext', !see && 'muted')}>${see ? q.question : 'Chờ người dẫn mở câu hỏi…'}</p>
     ${see && !g.shown && html`<p class="muted small">Câu hỏi này mới chỉ hiện với người dẫn.</p>`}

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { act, buildPack, newState, parseCSV, view, norm } from './game.js'
+import { act, buildPack, newState, parseCSV, view, norm, shortRounds } from './game.js'
 
 const q = (qid, round, answer = 'ĐÁP ÁN') => ({ qid, season: '26', match: 'M1Q1', round, subject: 'X', question: `Câu ${qid}?`, answer })
 const rows = [
@@ -82,4 +82,14 @@ A({ type: 'next' })
 assert.equal(s.sub.cur, 0)
 
 assert.equal(norm(' Hồ Chí Minh! '), 'HỒCHÍMINH')
+
+// Lọc theo môn: trận đã chọn mà có câu môn bị tắt thì thay bằng câu môn được bật.
+const mixed = rows.map((r, i) => ({ ...r, subject: i % 2 ? 'Math' : 'History' }))
+const extra = mixed.map(r => ({ ...r, subject: r.subject === 'Math' ? 'History' : 'Math', qid: r.qid.replace('26-M1Q1', '25-M2Q2'), match: 'M2Q2', season: '25' }))
+const mathOnly = buildPack([...mixed, ...extra], { match: '26-M1Q1', off: ['History'] })
+const all = [...mathOnly.kd1.flat(), ...mathOnly.kd2, ...mathOnly.vcnv.rows, ...mathOnly.vd.flat(), ...mathOnly.tb]
+assert.ok(all.every(q => q.subject === 'Math'))
+assert.deepEqual(mathOnly.off, ['History'])
+assert.deepEqual(shortRounds(mixed, []), [])
+assert.deepEqual(shortRounds(mixed, ['Math']), ['kd1', 'kd2', 'vcnv', 'vd'])
 console.log('ok')

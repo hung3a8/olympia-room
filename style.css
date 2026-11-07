@@ -259,3 +259,8 @@ input:disabled { background: var(--tile-2); }
 [data-role=player] .pk b { font-size: 22px; }
 [data-role=player] .pic { max-height: 28vh; aspect-ratio: auto; height: 28vh; }
 [data-role=player] .bar .right { grid-column: auto; justify-content: flex-end; }
+
+.cats { display: grid; gap: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill .n { font-size: .8em; opacity: .55; font-variant-numeric: tabular-nums; }
+.warn { margin: 0; color: var(--bad); font-weight: 500; }

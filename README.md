@@ -35,4 +35,6 @@ node test.mjs
 
 Kho dữ liệu không có từ khoá và hình CNV nên người dẫn nhập trong phòng chờ (bỏ trống thì bốc ngẫu nhiên). Câu hỏi thực hành ở Về đích không có trong kho.
 
+Trong phòng chờ, người dẫn bật/tắt 11 môn (Lịch sử, Địa lý, Văn học, Toán, Vật lý, Hoá học, Sinh học, Tiếng Anh, Nghệ thuật & Thể thao, Hiểu biết chung, Tư duy logic) theo cột `subject` của kho; mọi câu bốc và câu đổi đều chỉ lấy từ các môn đang bật. Nhãn môn do AI gắn nên có thể lệch.
+
 Người dẫn có thể đổi câu chưa mở, cộng/trừ điểm tay, hoàn tác, và tải lại trang để tiếp tục phòng cũ.

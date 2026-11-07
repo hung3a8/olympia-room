@@ -30,6 +30,20 @@ export function parseCSV(text) {
   return body.map(r => Object.fromEntries(head.map((h, i) => [h, r[i] ?? ''])))
 }
 
+// Nhãn môn có sẵn trong cột `subject` của kho (do AI gắn).
+export const SUBJECTS = {
+  History: 'Lịch sử', Geography: 'Địa lý', Literature: 'Văn học', Math: 'Toán', Physics: 'Vật lý',
+  Chemistry: 'Hoá học', Biology: 'Sinh học', English: 'Tiếng Anh', 'Art/Sports': 'Nghệ thuật & Thể thao',
+  'General/Social': 'Hiểu biết chung', 'Logic/IQ': 'Tư duy logic',
+}
+export const only = (rows, off = []) => (off.length ? rows.filter(r => !off.includes(r.subject)) : rows)
+// kd2 và câu hỏi phụ dùng chung kho KD-B: 12 + 5.
+export const NEED = { kd1: 24, kd2: 17, vcnv: 5, vd: 12 }
+export const shortRounds = (rows, off) => {
+  const P = pools(only(rows, off))
+  return Object.keys(NEED).filter(k => P[k].length < NEED[k])
+}
+
 export const pools = rows => ({
   kd1: rows.filter(r => r.round === 'KD' && !/-KD-B\./.test(r.qid)),
   kd2: rows.filter(r => /-KD-B\./.test(r.qid)),
@@ -50,6 +64,7 @@ export function draw(pool, n, used, rnd = Math.random) {
 
 // Ưu tiên câu của đúng trận được chọn; thiếu thì bốc ngẫu nhiên từ kho cùng vòng.
 export function buildPack(rows, o = {}, rnd = Math.random) {
+  rows = only(rows, o.off)
   const P = pools(rows), used = new Set()
   const m = o.match ? rows.filter(r => `${r.season}-${r.match}` === o.match) : []
   const fill = (re, pool, n) => {
@@ -68,6 +83,7 @@ export function buildPack(rows, o = {}, rnd = Math.random) {
     },
     vd: seat.map(p => fill(new RegExp(`-VD-${p + 1}\\.`), P.vd, 3)),
     tb: draw(P.tb, 5, used, rnd),
+    off: o.off || [],
   }
 }
 
