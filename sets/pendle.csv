@@ -1,0 +1,109 @@
+qid,season,match,round,subject,question,answer
+Pendle-1-KD-A1.1,Pendle,1,KD,Pendle · Cơ chế,"Trên Pendle, YT trả lợi suất cho người nắm giữ dưới dạng token nào?",SY
+Pendle-1-KD-A1.2,Pendle,1,KD,Pendle · Công ty,Ai là đồng sáng lập kiêm CEO của Pendle?,TN Lee
+Pendle-1-KD-A1.3,Pendle,1,KD,Pendle · Sản phẩm,Pendle V1 ra mắt mainnet trên blockchain nào vào tháng 6/2021?,Ethereum
+Pendle-1-KD-A1.4,Pendle,1,KD,Pendle · Cơ chế,"Vào ngày đáo hạn, giá trị của YT bằng bao nhiêu?",0
+Pendle-1-KD-A1.5,Pendle,1,KD,Pendle · Sản phẩm,Token quản trị của Pendle có mã giao dịch là gì?,PENDLE
+Pendle-1-KD-A1.6,Pendle,1,KD,Pendle · Công ty,"Vòng gọi vốn hạt giống 3,7 triệu USD của Pendle năm 2021 do quỹ đầu tư nào dẫn đầu?",Mechanism Capital
+Pendle-1-KD-A2.1,Pendle,1,KD,Pendle · Cơ chế,Chuẩn token SY của Pendle được đề xuất với số hiệu ERC nào?,ERC-5115
+Pendle-1-KD-A2.2,Pendle,1,KD,Pendle · Công ty,Ai là đồng sáng lập kiêm CTO của Pendle?,Vu Nguyen
+Pendle-1-KD-A2.3,Pendle,1,KD,Pendle · Sản phẩm,Tính năng lệnh giới hạn (limit order) của Pendle được công bố tháng 1/2024 và ban đầu chỉ có trên mạng nào?,Arbitrum
+Pendle-1-KD-A2.4,Pendle,1,KD,Pendle · Cơ chế,Lợi suất cố định (Fixed APY) khi mua PT trên Pendle bằng chỉ số APY nào hiển thị trên thị trường?,Implied APY
+Pendle-1-KD-A2.5,Pendle,1,KD,Pendle · Sản phẩm,"Tháng 1/2026, Pendle thay thế mô hình khoá vePENDLE bằng mô hình staking nào?",sPENDLE
+Pendle-1-KD-A2.6,Pendle,1,KD,Pendle · Công ty,"Tháng 7/2023, PENDLE được đưa lên chương trình Launchpool của sàn giao dịch nào?",Binance
+Pendle-1-KD-A3.1,Pendle,1,KD,Pendle · Cơ chế,"Trên Pendle, người dùng muốn đặt cược rằng lợi suất của tài sản sẽ tăng thì nên mua token nào: PT hay YT?",YT
+Pendle-1-KD-A3.2,Pendle,1,KD,Pendle · Sản phẩm,"Ngoài Ethereum, Pendle V1 còn được triển khai trên blockchain nào vào tháng 11/2021?",Avalanche
+Pendle-1-KD-A3.3,Pendle,1,KD,Pendle · Công ty,"Trước khi đồng sáng lập Pendle, TN Lee từng là Trưởng bộ phận phát triển kinh doanh của dự án nào?",Kyber Network
+Pendle-1-KD-A3.4,Pendle,1,KD,Pendle · Cơ chế,Chỉ số Underlying APY trên Pendle là trung bình trượt của bao nhiêu ngày?,7 ngày
+Pendle-1-KD-A3.5,Pendle,1,KD,Pendle · Sản phẩm,"Khi rút sPENDLE ngay lập tức thay vì chờ 14 ngày, người dùng phải trả phí bao nhiêu phần trăm?",5%
+Pendle-1-KD-A3.6,Pendle,1,KD,Pendle · Công ty,Bài viết lộ trình năm 2025 của Pendle mang tên gì?,Zenith
+Pendle-1-KD-A4.1,Pendle,1,KD,Pendle · Cơ chế,Mô hình AMM của Pendle V2 được điều chỉnh từ AMM của dự án nào?,Notional Finance
+Pendle-1-KD-A4.2,Pendle,1,KD,Pendle · Sản phẩm,"Với vePENDLE, người dùng có thể khoá PENDLE tối đa bao lâu?",2 năm
+Pendle-1-KD-A4.3,Pendle,1,KD,Pendle · Công ty,"Tháng 8/2023, quỹ đầu tư của sàn giao dịch nào đã rót vốn chiến lược vào Pendle?",Binance Labs (nay là YZi Labs)
+Pendle-1-KD-A4.4,Pendle,1,KD,Pendle · Cơ chế,"Trên Pendle, giá PT cộng giá YT bằng giá của tài sản nào?",Tài sản gốc (underlying)
+Pendle-1-KD-A4.5,Pendle,1,KD,Pendle · Sản phẩm,"Cứ bao nhiêu tuần một lần, PENDLE mua lại được phân phối cho người nắm giữ sPENDLE đang hoạt động?",2 tuần
+Pendle-1-KD-A4.6,Pendle,1,KD,Pendle · Công ty,"Theo DefiLlama, TVL của Pendle đạt đỉnh lịch sử khoảng 13,4 tỷ USD vào tháng và năm nào?",Tháng 9/2025
+Pendle-1-KD-B.1,Pendle,1,KD,Pendle · Cơ chế,Mua PT với giá thấp hơn tài sản gốc rồi giữ đến đáo hạn mang lại loại lợi suất nào: cố định hay thả nổi?,Cố định
+Pendle-1-KD-B.2,Pendle,1,KD,Pendle · Sản phẩm,Hiện nay Pendle thu bao nhiêu phần trăm trên toàn bộ lợi suất mà YT tích luỹ được?,5%
+Pendle-1-KD-B.3,Pendle,1,KD,Pendle · Công ty,Nhà sáng lập Kyber Network nào làm cố vấn cho Pendle khi dự án ra mắt năm 2021?,Loi Luu
+Pendle-1-KD-B.4,Pendle,1,KD,Pendle · Cơ chế,Chỉ số Long Yield APY trên Pendle có thể nhận giá trị âm hay không?,Có
+Pendle-1-KD-B.5,Pendle,1,KD,Pendle · Sản phẩm,"Từ tháng 1/2026, mô-đun nào thay cơ chế bỏ phiếu để phân bổ phần thưởng PENDLE? Cho biết tên viết tắt.",AIM (Algorithmic Incentive Module)
+Pendle-1-KD-B.6,Pendle,1,KD,Pendle · Công ty,"Trong phân bổ token PENDLE, hạng mục nào chiếm tỷ lệ lớn nhất, 37%?",Ưu đãi thanh khoản (liquidity incentives)
+Pendle-1-KD-B.7,Pendle,1,KD,Pendle · Cơ chế,Loại oracle giá PT nào được Pendle khuyến nghị cho các tích hợp hiện nay?,Linear Discount (chiết khấu tuyến tính)
+Pendle-1-KD-B.8,Pendle,1,KD,Pendle · Sản phẩm,"Tháng 12/2024, Pendle có mặt trên mạng Layer 2 nào do Coinbase phát triển?",Base
+Pendle-1-KD-B.9,Pendle,1,KD,Pendle · Công ty,"Năm 2025, doanh thu của Pendle vào khoảng bao nhiêu triệu USD, làm tròn đến hàng chục?",Khoảng 40 triệu USD (chấp nhận 37–40)
+Pendle-1-KD-B.10,Pendle,1,KD,Pendle · Cơ chế,"Trên Pendle, LP được nhận bao nhiêu phần trăm phí swap?",20%
+Pendle-1-KD-B.11,Pendle,1,KD,Pendle · Sản phẩm,"Trong thời kỳ ""giao dịch điểm"" năm 2024, người nắm giữ loại token nào trên Pendle nhận điểm thưởng (points) của tài sản gốc?",YT
+Pendle-1-KD-B.12,Pendle,1,KD,Pendle · Công ty,"Giá PENDLE lập đỉnh lịch sử 7,5 USD vào tháng và năm nào?",Tháng 4/2024
+Pendle-1-VCNV-1,Pendle,1,VCNV,Pendle · Cơ chế,Chữ S trong SY là viết tắt của từ tiếng Anh nào?,STANDARDIZED
+Pendle-1-VCNV-2,Pendle,1,VCNV,Pendle · Cơ chế,"PT là viết tắt của ""… Token"". Từ còn thiếu là gì?",PRINCIPAL
+Pendle-1-VCNV-3,Pendle,1,VCNV,Pendle · Cơ chế,Động từ tiếng Anh chỉ thao tác tạo ra PT và YT từ SY trên Pendle là gì?,MINT
+Pendle-1-VCNV-4,Pendle,1,VCNV,Pendle · Cơ chế,Từ tiếng Anh chỉ thời điểm PT được đổi 1:1 ra tài sản gốc và YT ngừng sinh lời là gì?,MATURITY
+Pendle-1-VCNV-5,Pendle,1,VCNV,Pendle · Cơ chế,YT là viết tắt của cụm từ tiếng Anh nào?,YIELD TOKEN
+Pendle-1-CNV,Pendle,1,CNV,Pendle · Cơ chế,Cơ chế cốt lõi của Pendle: tách tài sản sinh lời thành PT và YT.,TOKENIZATION
+Pendle-1-VD-1.1,Pendle,1,VD,Pendle · Cơ chế,"Một PT đáo hạn sau đúng 1 năm đang có giá 0,8 tài sản gốc. Lợi suất cố định theo năm khi mua và giữ PT đến đáo hạn là bao nhiêu phần trăm?",25%
+Pendle-1-VD-1.2,Pendle,1,VD,Pendle · Sản phẩm,Pendle chỉ có một pool PT/SY cho mỗi thị trường nhưng vẫn giao dịch được cả YT. Cơ chế nào cho phép điều đó?,"Flash swap qua pool PT/SY, dựa trên quan hệ giá PT + giá YT = giá tài sản gốc (mua YT: vay SY, tách thành PT + YT, bán PT để trả khoản vay)"
+Pendle-1-VD-1.3,Pendle,1,VD,Pendle · Công ty,"Lộ trình 2025 của Pendle công bố chiến lược ""Citadels"" gồm ba hướng mở rộng. Kể tên cả ba.","PT cho các chuỗi không phải EVM (Solana, TON, HYPE); PT cho tài chính truyền thống có KYC; PT tuân thủ Shariah cho các quỹ Hồi giáo"
+Pendle-1-VD-2.1,Pendle,1,VD,Pendle · Cơ chế,"Một thị trường có Implied APY 10%, nhưng lợi suất thực tế trung bình đến đáo hạn là 15%. Người mua PT hay người mua YT có lợi hơn so với kỳ vọng ban đầu? Giải thích.","Người mua YT, vì YT có lãi khi lợi suất thực tế cao hơn Implied APY lúc mua; người mua PT chỉ nhận đúng 10% cố định"
+Pendle-1-VD-2.2,Pendle,1,VD,Pendle · Sản phẩm,"Boros ra mắt ngày 6/8/2025 với hai thị trường đầu tiên. Đó là lãi suất funding của những tài sản nào, trên sàn nào?",BTC và ETH trên Binance
+Pendle-1-VD-2.3,Pendle,1,VD,Pendle · Công ty,"Theo Pendle, đợt đáo hạn ngày 26/6/2024 có khoảng 3 tỷ USD tài sản. Ba liquid restaking token nào chiếm 79% số đó? Nêu ít nhất hai.","eETH (ether.fi), ezETH (Renzo), pufETH (Puffer)"
+Pendle-1-VD-3.1,Pendle,1,VD,Pendle · Cơ chế,"Bạn mua YT với giá 0,05 tài sản gốc mỗi YT. Với 1.000 USD, bạn nhận lợi suất của bao nhiêu USD tài sản gốc, tức đòn bẩy lợi suất bao nhiêu lần?","20.000 USD, đòn bẩy 20 lần"
+Pendle-1-VD-3.2,Pendle,1,VD,Pendle · Sản phẩm,"Trước khi bị thay thế năm 2026, vePENDLE đem lại những quyền lợi chính nào? Nêu ít nhất ba.",Bỏ phiếu phân bổ phần thưởng cho các pool; nhận 80% phí swap của pool mình bầu; nhận phần phí từ lợi suất YT; tăng thưởng LP tới 250%
+Pendle-1-VD-3.3,Pendle,1,VD,Pendle · Công ty,"Khi bỏ vePENDLE năm 2026, Pendle dẫn một con số: chỉ khoảng bao nhiêu phần trăm nguồn cung PENDLE tham gia mô hình ve?",Khoảng 20%
+Pendle-1-VD-4.1,Pendle,1,VD,Pendle · Cơ chế,Vì sao LP trên Pendle gần như không chịu tổn thất tạm thời (impermanent loss) nếu giữ đến đáo hạn?,"Vì PT hội tụ về giá trị tài sản gốc khi đáo hạn, PT và SY tương quan chặt, và AMM thắt dần đường cong theo thời gian nên không còn tổn thất tạm thời tại đáo hạn"
+Pendle-1-VD-4.2,Pendle,1,VD,Pendle · Sản phẩm,"Phí swap trên Pendle V2 được tính theo công thức nào, và vì sao phí giảm dần khi gần đáo hạn?",Phí = (Fee tier / 365) × số ngày còn lại đến đáo hạn; phí tỷ lệ với thời gian còn lại nên giảm dần về 0
+Pendle-1-VD-4.3,Pendle,1,VD,Pendle · Công ty,Chuẩn ERC-5115 (SY) được tạo ngày 30/5/2022 bởi ba tác giả. Kể tên ít nhất hai.,"Vu Nguyen, Long Vuong, Anton Buenavista"
+Pendle-2-KD-A1.1,Pendle,2,KD,Pendle · Cơ chế,"Trên Pendle, trước ngày đáo hạn, muốn đổi lại về SY thì cần nắm giữ những token nào?","Cả PT và YT, cùng số lượng"
+Pendle-2-KD-A1.2,Pendle,2,KD,Pendle · Sản phẩm,"Tháng 6/2026, Pendle có mặt trên blockchain Layer 1 nào nổi tiếng với khả năng thực thi EVM song song?",Monad
+Pendle-2-KD-A1.3,Pendle,2,KD,Pendle · Công ty,Đội ngũ Pendle được thành lập vào năm nào?,2020
+Pendle-2-KD-A1.4,Pendle,2,KD,Pendle · Cơ chế,Chuẩn SY được thiết kế để bổ sung cho chuẩn vault token nào của Ethereum?,ERC-4626
+Pendle-2-KD-A1.5,Pendle,2,KD,Pendle · Sản phẩm,"Trong thời kỳ giao dịch điểm năm 2024, YT trên Pendle cho phép đòn bẩy điểm thưởng lên tới bao nhiêu lần?",128 lần
+Pendle-2-KD-A1.6,Pendle,2,KD,Pendle · Công ty,"Trước khi về Pendle, CTO Vu Nguyen từng là trưởng nhóm phát triển hợp đồng thông minh tại dự án nào?",Digix
+Pendle-2-KD-A2.1,Pendle,2,KD,Pendle · Cơ chế,"Khi mua YT trên Pendle, người dùng nhận được gì cho đến ngày đáo hạn?",Toàn bộ lợi suất (và điểm thưởng) của tài sản gốc
+Pendle-2-KD-A2.2,Pendle,2,KD,Pendle · Sản phẩm,Người nắm giữ YT-USDe trên Pendle nhận đơn vị điểm thưởng nào của Ethena?,Sats (Ethena Sats)
+Pendle-2-KD-A2.3,Pendle,2,KD,Pendle · Công ty,"Theo Pendle, khối lượng giao dịch năm 2025 vào khoảng bao nhiêu tỷ USD?","Khoảng 48 tỷ USD (47,8 tỷ)"
+Pendle-2-KD-A2.4,Pendle,2,KD,Pendle · Cơ chế,"Khi lợi suất dương, trước đáo hạn giá PT cao hơn hay thấp hơn giá tài sản gốc?",Thấp hơn
+Pendle-2-KD-A2.5,Pendle,2,KD,Pendle · Sản phẩm,"Trước năm 2026, phần thưởng PENDLE cho các pool được phân bổ theo phiếu bầu của người nắm giữ token nào?",vePENDLE
+Pendle-2-KD-A2.6,Pendle,2,KD,Pendle · Công ty,"Trong phân bổ token PENDLE, đội ngũ được bao nhiêu phần trăm?",22%
+Pendle-2-KD-A3.1,Pendle,2,KD,Pendle · Cơ chế,"Trên sổ lệnh của Pendle, người đặt lệnh giới hạn (maker) hiện trả phí bao nhiêu?",0 (miễn phí)
+Pendle-2-KD-A3.2,Pendle,2,KD,Pendle · Sản phẩm,"Tháng 3/2025, Pendle triển khai trên Berachain và một blockchain được đổi tên từ Fantom. Đó là blockchain nào?",Sonic
+Pendle-2-KD-A3.3,Pendle,2,KD,Pendle · Công ty,"Trong Binance Launchpool tháng 7/2023, bao nhiêu phần trăm tổng cung PENDLE được phân bổ?",2%
+Pendle-2-KD-A3.4,Pendle,2,KD,Pendle · Cơ chế,"Một PT có giá 0,9 tài sản gốc. Giá YT tương ứng xấp xỉ bao nhiêu?","0,1"
+Pendle-2-KD-A3.5,Pendle,2,KD,Pendle · Sản phẩm,Thời gian chờ thông thường để rút sPENDLE là bao nhiêu ngày?,14 ngày
+Pendle-2-KD-A3.6,Pendle,2,KD,Pendle · Công ty,"Thuật ngữ ""The Pendle Effect"" do nền tảng dữ liệu blockchain nào đặt ra?",Dune
+Pendle-2-KD-A4.1,Pendle,2,KD,Pendle · Cơ chế,Uniswap V3 tập trung thanh khoản theo khoảng giá. AMM của Pendle tập trung thanh khoản theo khoảng của đại lượng nào?,Implied APY (lợi suất ngầm định)
+Pendle-2-KD-A4.2,Pendle,2,KD,Pendle · Sản phẩm,"Ở thời điểm cao nhất, khoảng một nửa TVL của giao thức stablecoin tổng hợp nào nằm trên Pendle?",Ethena
+Pendle-2-KD-A4.3,Pendle,2,KD,Pendle · Công ty,"Quỹ Binance Labs, nhà đầu tư chiến lược của Pendle, đã đổi tên thành gì?",YZi Labs
+Pendle-2-KD-A4.4,Pendle,2,KD,Pendle · Cơ chế,Điểm thưởng (points) của tài sản gốc có bị Pendle thu phí 5% giống lợi suất YT không?,"Có, điểm được tính như lợi suất"
+Pendle-2-KD-A4.5,Pendle,2,KD,Pendle · Sản phẩm,"Năm 2026, Pendle tập trung vào nhóm tài sản nào, với 66 thị trường mới ra mắt?",RWA (tài sản thực được token hoá)
+Pendle-2-KD-A4.6,Pendle,2,KD,Pendle · Công ty,"Giá PENDLE chạm đáy lịch sử vào tháng 11/2022, cùng thời điểm ra mắt phiên bản nào của Pendle?",Pendle V2
+Pendle-2-KD-B.1,Pendle,2,KD,Pendle · Cơ chế,Hiện nay 80% phí của Pendle (sau phần chia cho LP) được dùng vào việc gì?,Mua lại PENDLE (buyback)
+Pendle-2-KD-B.2,Pendle,2,KD,Pendle · Sản phẩm,vePENDLE tăng phần thưởng cho LP tối đa bao nhiêu phần trăm?,250%
+Pendle-2-KD-B.3,Pendle,2,KD,Pendle · Công ty,"Tháng 4/2024, TVL Pendle vượt 4 tỷ USD. CEO TN Lee cho rằng nhờ tài sản restaking và giao thức nào?",Ethena
+Pendle-2-KD-B.4,Pendle,2,KD,Pendle · Cơ chế,"Khi lợi suất tài sản gốc tăng mạnh, giá YT trên Pendle có xu hướng tăng hay giảm?",Tăng
+Pendle-2-KD-B.5,Pendle,2,KD,Pendle · Sản phẩm,"Tháng 9/2026, Pendle có mặt trên blockchain do một ứng dụng môi giới chứng khoán nổi tiếng của Mỹ phát triển. Đó là chuỗi nào?",Robinhood Chain
+Pendle-2-KD-B.6,Pendle,2,KD,Pendle · Công ty,Lộ trình 2025 của Pendle cho rằng thị trường phái sinh lãi suất toàn cầu lớn hơn thị trường lợi suất của Pendle khoảng bao nhiêu lần?,30.000 lần
+Pendle-2-KD-B.7,Pendle,2,KD,Pendle · Cơ chế,"Giữ PT đến đáo hạn, bạn nhận lại bao nhiêu tài sản gốc cho mỗi PT?",1
+Pendle-2-KD-B.8,Pendle,2,KD,Pendle · Sản phẩm,"Theo Pendle, vào đỉnh tháng 12/2024 có bao nhiêu thị trường hoạt động cùng lúc? Chấp nhận sai số 10.",121
+Pendle-2-KD-B.9,Pendle,2,KD,Pendle · Công ty,"Vòng gọi vốn 3,7 triệu USD năm 2021 của Pendle tương ứng khoảng bao nhiêu phần trăm tổng cung?","14,9% (chấp nhận 15%)"
+Pendle-2-KD-B.10,Pendle,2,KD,Pendle · Cơ chế,"Ngoài phí swap và thưởng PENDLE, LP trên Pendle còn nhận hai nguồn lợi suất nào?",Lợi suất của SY và lợi suất cố định của PT
+Pendle-2-KD-B.11,Pendle,2,KD,Pendle · Sản phẩm,"Theo lịch phát hành ban đầu, từ sau tháng 4/2026 PENDLE có mức lạm phát hằng năm cố định là bao nhiêu?",2%
+Pendle-2-KD-B.12,Pendle,2,KD,Pendle · Công ty,"Theo Pendle, năm 2025 giao thức có thêm khoảng bao nhiêu người dùng mới, làm tròn đến nghìn?",Khoảng 156.000 (155.553)
+Pendle-2-VCNV-1,Pendle,2,VCNV,Pendle · Sản phẩm,Sản phẩm này cho phép giao dịch lãi suất loại nào của hợp đồng vĩnh cửu (một từ tiếng Anh)?,FUNDING
+Pendle-2-VCNV-2,Pendle,2,VCNV,Pendle · Sản phẩm,Sản phẩm này ra mắt ngày 6/8/2025 trên mạng Layer 2 nào?,ARBITRUM
+Pendle-2-VCNV-3,Pendle,2,VCNV,Pendle · Sản phẩm,Hai thị trường đầu tiên của sản phẩm theo dõi lãi suất funding BTC và ETH trên sàn nào?,BINANCE
+Pendle-2-VCNV-4,Pendle,2,VCNV,Pendle · Sản phẩm,"Sau đó, sản phẩm hỗ trợ thêm lãi suất funding của sàn perp phi tập trung nào?",HYPERLIQUID
+Pendle-2-VCNV-5,Pendle,2,VCNV,Pendle · Sản phẩm,"Đơn vị giao dịch của sản phẩm, đại diện cho lãi suất thả nổi của 1 đơn vị tài sản thế chấp, gọi là gì?",YIELD UNIT
+Pendle-2-CNV,Pendle,2,CNV,Pendle · Sản phẩm,Sản phẩm giao dịch lãi suất funding của Pendle.,BOROS
+Pendle-2-VD-1.1,Pendle,2,VD,Pendle · Cơ chế,"Một PT đáo hạn sau nửa năm (182,5 ngày) có giá 0,96 tài sản gốc. Implied APY theo năm (lãi kép) xấp xỉ bao nhiêu?","Khoảng 8,5%, vì (1/0,96)² − 1 ≈ 8,51%"
+Pendle-2-VD-1.2,Pendle,2,VD,Pendle · Sản phẩm,sPENDLE khác vePENDLE ở những điểm nào? Nêu ít nhất hai.,"Không khoá dài hạn (rút sau 14 ngày, hoặc ngay với phí 5%); PENDLE mua lại được chia 2 tuần một lần cho người đang hoạt động; phần thưởng thanh khoản do thuật toán AIM phân bổ thay vì bỏ phiếu"
+Pendle-2-VD-1.3,Pendle,2,VD,Pendle · Công ty,Kể tên ít nhất ba nhà đầu tư trong các vòng gọi vốn năm 2021 của Pendle.,"Mechanism Capital (dẫn đầu), Crypto.com Capital, HashKey, Spartan Group"
+Pendle-2-VD-2.1,Pendle,2,VD,Pendle · Cơ chế,Implied APY của một thị trường là 8%. Bạn tin lợi suất thực tế đến đáo hạn chỉ khoảng 5%. Nên mua PT hay YT? Vì sao?,"Mua PT: khoá 8% cố định, cao hơn 5% thực tế; YT sẽ lỗ vì lợi suất nhận được thấp hơn mức đã trả"
+Pendle-2-VD-2.2,Pendle,2,VD,Pendle · Sản phẩm,"Trên Boros, người ""long YU"" trả gì và nhận gì?","Trả lãi suất cố định, nhận lãi suất thả nổi (funding rate)"
+Pendle-2-VD-2.3,Pendle,2,VD,Pendle · Công ty,"Doanh thu Pendle năm 2024 khoảng 17,7 triệu USD. Năm 2025 doanh thu khoảng bao nhiêu, tức gấp khoảng mấy lần?","Khoảng 37–40 triệu USD, gấp khoảng 2 lần"
+Pendle-2-VD-3.1,Pendle,2,VD,Pendle · Cơ chế,"Vì sao giá YT giảm dần về 0 theo thời gian, kể cả khi lợi suất tài sản gốc không đổi?","YT chỉ đại diện cho lợi suất từ nay đến đáo hạn; thời gian còn lại càng ngắn thì phần lợi suất còn nhận càng ít, đến đáo hạn bằng 0"
+Pendle-2-VD-3.2,Pendle,2,VD,Pendle · Sản phẩm,"Năm 2025, Aave bắt đầu nhận PT của Pendle làm tài sản thế chấp. PT đầu tiên là gì, và Aave định giá PT bằng loại oracle nào?",PT-sUSDe-31JUL2025; oracle chiết khấu tuyến tính (linear discount)
+Pendle-2-VD-3.3,Pendle,2,VD,Pendle · Công ty,"Theo DefiLlama, TVL của Pendle vào cuối 2023, cuối 2024 và tại đỉnh tháng 9/2025 xấp xỉ bao nhiêu?","Khoảng 234 triệu USD; 4,4 tỷ USD; 13,4 tỷ USD"
+Pendle-2-VD-4.1,Pendle,2,VD,Pendle · Cơ chế,Một PT đáo hạn sau 1 năm có Implied APY 10%. Giá PT và giá YT (theo tài sản gốc) xấp xỉ bao nhiêu?,"PT ≈ 0,909; YT ≈ 0,091"
+Pendle-2-VD-4.2,Pendle,2,VD,Pendle · Sản phẩm,Bộ định tuyến của Pendle khớp lệnh từ hai nguồn thanh khoản. Đó là hai nguồn nào?,AMM (pool PT/SY) và sổ lệnh giới hạn (limit order)
+Pendle-2-VD-4.3,Pendle,2,VD,Pendle · Công ty,"Sau khoảng 7 tháng hoạt động, Boros đạt khối lượng danh nghĩa bao nhiêu, và OI đỉnh khoảng bao nhiêu?","Hơn 11,5 tỷ USD khối lượng; OI đỉnh khoảng 270 triệu USD"

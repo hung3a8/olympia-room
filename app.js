@@ -1,7 +1,11 @@
 import { html, render } from 'https://unpkg.com/htm@3.1.1/preact/standalone.module.js'
 import { act, view, newState, buildPack, parseCSV, pools, draw, norm, active, topTied, NAMES, FLOW, T, vdVal, SUBJECTS, only, shortRounds } from './game.js'
 
-const CSV = 'https://lqtue.github.io/olympia-questions/questions.csv'
+// Bộ đề tự soạn dùng cùng cột CSV với kho Olympia và mặc định tắt.
+const SETS = [
+  { id: 'olympia', name: 'Olympia (VTV)', url: 'https://lqtue.github.io/olympia-questions/questions.csv', on: true },
+  { id: 'pendle', name: 'Pendle', url: 'sets/pendle.csv' },
+]
 const PREFIX = 'olympia-vn-room-'
 const SAVE = 'olympia-host'
 const ALPHA = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
@@ -18,7 +22,9 @@ const CID = (() => {
 const S = {
   screen: 'home', role: null, want: 'player', name: store.get('olympia-name') || '',
   code: location.hash.slice(1).toUpperCase(), status: '', game: null, slot: -1, off: 0,
-  rows: null, matches: [], counts: {}, setup: { match: '', key: '', img: '', off: store.get('olympia-off') || [] }, viewers: [],
+  all: null, rows: null, matches: [], counts: {}, viewers: [],
+  sets: store.get('olympia-sets') || SETS.filter(x => x.on).map(x => x.id),
+  setup: { match: '', key: '', img: '', off: store.get('olympia-off') || [] },
 }
 let G = null, peer = null, conn = null, retryT = 0
 const conns = new Map(), hist = []
@@ -138,19 +144,26 @@ function reroll(row) {
 
 async function loadCSV() {
   try {
-    const rows = parseCSV(await (await fetch(CSV)).text())
-    const m = new Map()
-    for (const r of rows) {
-      const l = m.get(r.season) || m.set(r.season, []).get(r.season)
-      if (!l.includes(r.match)) l.push(r.match)
-    }
-    const counts = {}
-    for (const r of rows) counts[r.subject] = (counts[r.subject] || 0) + 1
-    set({ rows, matches: [...m], counts })
+    const all = await Promise.all(SETS.map(async x => parseCSV(await (await fetch(x.url)).text())))
+    S.all = Object.fromEntries(SETS.map((x, i) => [x.id, all[i]]))
+    useSets(S.sets)
   } catch (e) {
     set({ status: `Không tải được kho câu hỏi: ${e.message}` })
   }
 }
+function useSets(sets) {
+  store.set('olympia-sets', sets)
+  const rows = SETS.filter(x => sets.includes(x.id)).flatMap(x => S.all[x.id])
+  const m = new Map()
+  for (const r of rows) {
+    const l = m.get(r.season) || m.set(r.season, []).get(r.season)
+    if (!l.includes(r.match)) l.push(r.match)
+  }
+  const counts = {}
+  for (const r of rows) if (r.round !== 'CNV') counts[r.subject] = (counts[r.subject] || 0) + 1
+  set({ sets, rows, matches: [...m], counts, setup: { ...S.setup, match: '' } })
+}
+const toggleSet = id => useSets(S.sets.includes(id) ? S.sets.filter(x => x !== id) : [...S.sets, id])
 
 function start() {
   doo({ type: 'pack', pack: buildPack(S.rows, S.setup) })
@@ -209,6 +222,7 @@ function setOff(off) {
   store.set('olympia-off', off)
   set({ setup: { ...S.setup, off } })
 }
+const subjects = () => Object.keys({ ...SUBJECTS, ...S.counts }).filter(k => S.counts[k])
 const toggleSubject = k => setOff(S.setup.off.includes(k) ? S.setup.off.filter(x => x !== k) : [...S.setup.off, k])
 
 const App = () => (S.screen === 'home' ? Home() : Room())
@@ -324,29 +338,36 @@ function Lobby(g) {
     <div class="panel">
       <h2>Bộ đề</h2>
       ${!S.rows ? html`<p class="muted">Đang tải kho câu hỏi…</p>` : html`
+        <div class="cats">
+          <span class="muted small">Kho đề</span>
+          <div class="chips">${SETS.map(x => html`
+            <button class=${cls('pill', S.sets.includes(x.id) && 'on')} aria-pressed=${S.sets.includes(x.id)} onClick=${() => toggleSet(x.id)}>
+              ${x.name}<span class="n">${S.all[x.id].length.toLocaleString('vi-VN')}</span>
+            </button>`)}</div>
+        </div>
         <label>Lấy đề theo trận
           <select onChange=${e => (S.setup.match = e.target.value)}>
             <option value="">Ngẫu nhiên toàn bộ kho</option>
-            ${S.matches.map(([season, list]) => html`<optgroup label=${`Năm thứ ${season}`}>
-              ${list.map(m => html`<option value=${`${season}-${m}`} selected=${S.setup.match === `${season}-${m}`}>${matchName(m)} · năm ${season}</option>`)}
+            ${S.matches.map(([season, list]) => html`<optgroup label=${/^\d+$/.test(season) ? `Năm thứ ${season}` : season}>
+              ${list.map(m => html`<option value=${`${season}-${m}`} selected=${S.setup.match === `${season}-${m}`}>${/^\d+$/.test(season) ? `${matchName(m)} · năm ${season}` : `${season} · đề ${m}`}</option>`)}
             </optgroup>`)}
           </select>
         </label>
-        <label>Từ khoá chướng ngại vật<input value=${S.setup.key} placeholder="Bỏ trống để bốc ngẫu nhiên" onInput=${e => (S.setup.key = e.target.value)} /></label>
+        <label>Từ khoá chướng ngại vật<input value=${S.setup.key} placeholder="Bỏ trống để dùng từ khoá của đề" onInput=${e => (S.setup.key = e.target.value)} /></label>
         <label>Ảnh chướng ngại vật (URL, không bắt buộc)<input value=${S.setup.img} placeholder="https://…" onInput=${e => (S.setup.img = e.target.value)} /></label>
         <div class="cats">
-          <span class="muted small">Môn thi · bật ${Object.keys(SUBJECTS).filter(k => !S.setup.off.includes(k)).length}/${Object.keys(SUBJECTS).length}</span>
-          <div class="chips">${Object.entries(SUBJECTS).map(([k, v]) => html`
+          <span class="muted small">Môn thi · bật ${subjects().filter(k => !S.setup.off.includes(k)).length}/${subjects().length}</span>
+          <div class="chips">${subjects().map(k => html`
             <button class=${cls('pill', !S.setup.off.includes(k) && 'on')} aria-pressed=${!S.setup.off.includes(k)} onClick=${() => toggleSubject(k)}>
-              ${v}<span class="n">${(S.counts[k] || 0).toLocaleString('vi-VN')}</span>
+              ${SUBJECTS[k] || k}<span class="n">${(S.counts[k] || 0).toLocaleString('vi-VN')}</span>
             </button>`)}</div>
           <div class="btns">
             <button class="pill" onClick=${() => setOff([])}>Bật tất cả</button>
-            <button class="pill" onClick=${() => setOff(Object.keys(SUBJECTS))}>Tắt tất cả</button>
+            <button class="pill" onClick=${() => setOff(subjects())}>Tắt tất cả</button>
           </div>
-          ${short.length > 0 && html`<p class="warn">Không đủ câu hỏi cho: ${short.map(k => NAMES[k]).join(', ')}. Hãy bật thêm môn.</p>`}
+          ${short.length > 0 && html`<p class="warn">Không đủ câu hỏi cho: ${short.map(k => NAMES[k]).join(', ')}. Hãy bật thêm môn hoặc kho đề.</p>`}
         </div>
-        <p class="muted small">Kho dữ liệu không có từ khoá và ảnh CNV nên người dẫn tự nhập. Vòng Tăng tốc được lược bỏ. Câu nào trận đã chọn thiếu sẽ được bốc ngẫu nhiên trong cùng vòng.</p>
+        <p class="muted small">Kho Olympia không có từ khoá và ảnh CNV nên người dẫn tự nhập; bộ đề tự soạn đã có từ khoá. Vòng Tăng tốc được lược bỏ. Câu nào trận đã chọn thiếu sẽ được bốc ngẫu nhiên trong cùng vòng.</p>
         <button class="pill primary wide" disabled=${!active(g).length || short.length > 0} onClick=${start}>
           ${active(g).length ? `Bắt đầu với ${active(g).length} thí sinh` : 'Cần ít nhất 1 thí sinh'}
         </button>`}

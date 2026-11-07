@@ -37,4 +37,20 @@ Kho dữ liệu không có từ khoá và hình CNV nên người dẫn nhập t
 
 Trong phòng chờ, người dẫn bật/tắt 11 môn (Lịch sử, Địa lý, Văn học, Toán, Vật lý, Hoá học, Sinh học, Tiếng Anh, Nghệ thuật & Thể thao, Hiểu biết chung, Tư duy logic) theo cột `subject` của kho; mọi câu bốc và câu đổi đều chỉ lấy từ các môn đang bật. Nhãn môn do AI gắn nên có thể lệch.
 
+## Bộ đề tự soạn
+
+Trong phòng chờ, mục **Kho đề** bật/tắt từng kho; kho Olympia bật sẵn, bộ đề tự soạn mặc định tắt. Bật nhiều kho thì câu được trộn chung.
+
+Hiện có `sets/pendle.csv`: 2 đề hoàn chỉnh về giao thức Pendle (cơ chế, sản phẩm, công ty), số liệu cập nhật đến tháng 11/2026. Thêm bộ mới: tạo CSV cùng cột với kho Olympia rồi thêm một dòng vào `SETS` trong `app.js`. Mỗi đề cần:
+
+| qid | round | Số câu |
+|---|---|---|
+| `<season>-<match>-KD-A<p>.<i>` | KD | 6 câu × 4 ghế |
+| `<season>-<match>-KD-B.<i>` | KD | 12 (dư thì dùng làm câu hỏi phụ) |
+| `<season>-<match>-VCNV-<1..5>` | VCNV | 4 hàng ngang + ô trung tâm |
+| `<season>-<match>-CNV` | CNV | 1, đáp án là từ khoá |
+| `<season>-<match>-VD-<p>.<i>` | VD | 3 câu × 4 ghế |
+
+`node test.mjs` kiểm tra mỗi đề Pendle đủ số câu.
+
 Người dẫn có thể đổi câu chưa mở, cộng/trừ điểm tay, hoàn tác, và tải lại trang để tiếp tục phòng cũ.

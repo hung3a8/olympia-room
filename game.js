@@ -67,8 +67,12 @@ export function buildPack(rows, o = {}, rnd = Math.random) {
   rows = only(rows, o.off)
   const P = pools(rows), used = new Set()
   const m = o.match ? rows.filter(r => `${r.season}-${r.match}` === o.match) : []
-  const fill = (re, pool, n) => {
-    const own = m.filter(r => re.test(r.qid)).slice(0, n)
+  // Đề tự soạn có hàng CNV (từ khoá); chế độ ngẫu nhiên vẫn lấy trọn một ô chữ để hàng ngang khớp từ khoá.
+  const keys = rows.filter(r => r.round === 'CNV')
+  const cnv = m.find(r => r.round === 'CNV') || (!m.some(r => r.round === 'VCNV') && keys[Math.floor(rnd() * keys.length)])
+  const vm = cnv ? rows.filter(r => r.season === cnv.season && r.match === cnv.match) : m
+  const fill = (re, pool, n, src = m) => {
+    const own = src.filter(r => re.test(r.qid)).slice(0, n)
     own.forEach(r => used.add(r.qid))
     return own.map(trim).concat(draw(pool, n - own.length, used, rnd))
   }
@@ -77,8 +81,8 @@ export function buildPack(rows, o = {}, rnd = Math.random) {
     kd1: seat.map(p => fill(new RegExp(`-KD-A?${p + 1}\\.`), P.kd1, 6)),
     kd2: fill(/-KD-B\./, P.kd2, 12),
     vcnv: {
-      rows: [1, 2, 3, 4, 5].map(n => fill(new RegExp(`-VCNV-${n}$`), P.vcnv, 1)[0]),
-      key: o.key?.trim() || draw(P.vcnv.filter(r => norm(r.answer).length >= 8), 1, used, rnd)[0]?.answer || '',
+      rows: [1, 2, 3, 4, 5].map(n => fill(new RegExp(`-VCNV-${n}$`), P.vcnv, 1, vm)[0]),
+      key: o.key?.trim() || cnv?.answer || draw(P.vcnv.filter(r => norm(r.answer).length >= 8), 1, used, rnd)[0]?.answer || '',
       img: o.img?.trim() || '',
     },
     vd: seat.map(p => fill(new RegExp(`-VD-${p + 1}\\.`), P.vd, 3)),

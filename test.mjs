@@ -1,3 +1,4 @@
+import fs from 'node:fs'
 import assert from 'node:assert/strict'
 import { act, buildPack, newState, parseCSV, view, norm, shortRounds } from './game.js'
 
@@ -92,4 +93,24 @@ assert.ok(all.every(q => q.subject === 'Math'))
 assert.deepEqual(mathOnly.off, ['History'])
 assert.deepEqual(shortRounds(mixed, []), [])
 assert.deepEqual(shortRounds(mixed, ['Math']), ['kd1', 'kd2', 'vcnv', 'vd'])
+// Đề tự soạn: hàng CNV là từ khoá; ngẫu nhiên vẫn lấy trọn ô chữ của một đề.
+const own = rows.map(r => ({ ...r, qid: r.qid.replace('26-M1Q1', 'X-1'), season: 'X', match: '1' }))
+const cnvRow = { qid: 'X-1-CNV', season: 'X', match: '1', round: 'CNV', subject: 'X', question: '', answer: 'PENDLE' }
+const mixPack = buildPack([...rows, ...own, cnvRow], {}, () => 0.99)
+assert.equal(mixPack.vcnv.key, 'PENDLE')
+assert.ok(mixPack.vcnv.rows.every(q => q.qid.startsWith('X-1-VCNV-')))
+assert.equal(buildPack([...own, cnvRow], { match: 'X-1', key: 'khác' }).vcnv.key, 'khác')
+
+const pendle = parseCSV(fs.readFileSync(new URL('./sets/pendle.csv', import.meta.url), 'utf8'))
+assert.deepEqual(shortRounds(pendle, []), [])
+for (const m of new Set(pendle.map(r => r.match))) {
+  const n = re => pendle.filter(r => r.match === m && re.test(r.qid)).length
+  assert.deepEqual([n(/-KD-A\d/), n(/-KD-B\./), n(/-VCNV-/), n(/-CNV$/), n(/-VD-/)], [24, 12, 5, 1, 12], `đề ${m} thiếu câu`)
+  const p = buildPack(pendle, { match: `Pendle-${m}` }, () => 0)
+  const ids = [...p.kd1.flat(), ...p.kd2, ...p.vcnv.rows, ...p.vd.flat()].map(q => q.qid)
+  assert.ok(ids.every(id => id.startsWith(`Pendle-${m}-`)), `đề ${m} chưa đủ câu`)
+  assert.ok(norm(p.vcnv.key).length >= 4)
+  assert.ok(p.vcnv.rows.every(q => norm(q.answer).length > 0))
+}
+assert.equal(new Set(pendle.map(r => r.qid)).size, pendle.length)
 console.log('ok')
