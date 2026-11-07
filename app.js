@@ -24,7 +24,11 @@ let G = null, peer = null, conn = null, retryT = 0
 const conns = new Map(), hist = []
 
 const root = document.getElementById('app')
-const paint = () => { if (S.game) sound(S.game); render(App(), root) }
+const paint = () => {
+  if (S.game) sound(S.game)
+  document.body.dataset.role = S.screen === 'room' ? S.role : ''
+  render(App(), root)
+}
 const set = p => (Object.assign(S, p), paint())
 const cls = (...a) => a.filter(Boolean).join(' ')
 const newCode = () => Array.from(crypto.getRandomValues(new Uint8Array(5)), b => ALPHA[b % ALPHA.length]).join('')
@@ -283,7 +287,7 @@ function tags(g, i) {
 function Scores(g) {
   const turn = turnOf(g), lobby = g.phase === 'lobby'
   return html`<section class="scores">${g.slots.map((p, i) => html`
-    <div class=${cls('score', !p && 'empty', turn === i && 'turn', g.buzz?.who === i && 'buzzed', g.phase === 'vcnv' && g.sub.elim.includes(i) && 'out')}>
+    <div class=${cls('score', !p && 'empty', S.slot === i && 'me', turn === i && 'turn', g.buzz?.who === i && 'buzzed', g.phase === 'vcnv' && g.sub.elim.includes(i) && 'out')}>
       <div class="pos"><span>${i + 1}</span>${S.slot === i && html`<em>Bạn</em>`}${p && !p.online && html`<em class="off">Mất kết nối</em>`}</div>
       <div class="who">${p ? p.name : 'Ghế trống'}</div>
       <div class="pts">${p ? p.score : '–'}</div>
@@ -514,7 +518,7 @@ function PlayerBar(g) {
     const ok = canBuzz(g)
     return html`<section class="dock"><div class="frame dockin">
       <button class=${cls('buzz', ok && 'ready', g.buzz?.who === i && 'mine')} disabled=${!ok} onClick=${() => send({ type: 'buzz' })}>
-        ${g.buzz?.who === i ? 'Bạn giành quyền · trả lời ngay' : ok ? 'Bấm chuông · Space' : 'Chuông chưa mở'}
+        ${g.buzz?.who === i ? 'Bạn giành quyền · trả lời ngay' : ok ? 'Bấm chuông · Space' : g.buzz?.who != null ? `${nameOf(g, g.buzz.who)} đã giành quyền` : 'Chuông chưa mở'}
       </button>
     </div></section>`
   }

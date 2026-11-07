@@ -208,3 +208,54 @@ input:disabled { background: var(--tile-2); }
   .list .line .btns { grid-column: 1 / -1; }
   .pk b { font-size: 24px; }
 }
+
+/* Người dẫn: chữ to, nút lớn để bấm nhanh khi đang dẫn. */
+[data-role=host] { font-size: 17px; }
+[data-role=host] .pill { height: 52px; padding: 0 24px; font-size: 16px; }
+[data-role=host] .dock .pill { height: 64px; padding: 0 32px; font-size: 18px; font-weight: 600; }
+[data-role=host] .dockin { padding-block: 16px; gap: 16px; }
+[data-role=host] .btns { gap: 12px; }
+[data-role=host] .room { padding-bottom: 220px; }
+[data-role=host] input, [data-role=host] select { height: 52px; font-size: 17px; }
+[data-role=host] .score { padding: 18px 20px; }
+[data-role=host] .score .who { font-size: 18px; }
+[data-role=host] .score .adj { gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+[data-role=host] .score .adj button { min-width: 56px; height: 44px; padding: 0 14px; font-size: 16px; font-weight: 600; }
+[data-role=host] .pk .mini { gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+[data-role=host] .pk .mini button { height: 44px; padding: 0 16px; font-size: 15px; font-weight: 500; }
+[data-role=host] .row { padding: 14px 16px; min-height: 64px; }
+[data-role=host] .row .rn { font-size: 16px; }
+[data-role=host] .row .rl { font-size: 14px; }
+[data-role=host] .link { font-size: 14px; padding: 8px 14px; border-radius: 999px; background: var(--bg); }
+[data-role=host] .qmeta { font-size: 15px; }
+[data-role=host] .qtext { font-size: clamp(26px, 2.8vw, 46px); }
+[data-role=host] .ans { font-size: clamp(24px, 2.4vw, 36px); }
+[data-role=host] .banner { padding: 16px 20px; font-size: 18px; }
+[data-role=host] .list .line { padding: 12px 0; font-size: 18px; }
+[data-role=host] .clock b { font-size: 28px; }
+
+/* Thí sinh: chỉ giữ câu hỏi, đồng hồ, điểm gọn và nút thao tác. */
+[data-role=player] .rounds,
+[data-role=player] .bar > div:nth-child(2),
+[data-role=player] .qmeta,
+[data-role=player] .score .pos,
+[data-role=player] .score .tags,
+[data-role=player] .score.empty,
+[data-role=player] .banner:not(.hot),
+[data-role=player] .pack > .muted,
+[data-role=player] .pk span,
+[data-role=player] .row .rl { display: none; }
+[data-role=player] .bar { grid-template-columns: 1fr auto; }
+[data-role=player] .scores { display: flex; gap: 6px; }
+[data-role=player] .score { flex: 1; min-width: 0; min-height: 0; padding: 8px 10px; gap: 0; }
+[data-role=player] .score .who { font-size: 12px; }
+[data-role=player] .score .pts { font-size: 22px; }
+[data-role=player] .score.me { box-shadow: inset 0 0 0 2px var(--ink); }
+[data-role=player] .score.buzzed { box-shadow: inset 0 0 0 3px var(--accent); }
+[data-role=player] .q { min-height: 45vh; align-content: center; padding: clamp(20px, 4vw, 48px); }
+[data-role=player] .qtext { font-size: clamp(24px, 6vw, 48px); line-height: 1.3; }
+[data-role=player] .clock b { font-size: 28px; }
+[data-role=player] .pk { padding: 10px 12px; }
+[data-role=player] .pk b { font-size: 22px; }
+[data-role=player] .pic { max-height: 28vh; aspect-ratio: auto; height: 28vh; }
+[data-role=player] .bar .right { grid-column: auto; justify-content: flex-end; }
