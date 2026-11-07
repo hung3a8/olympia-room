@@ -1,0 +1,85 @@
+import assert from 'node:assert/strict'
+import { act, buildPack, newState, parseCSV, view, norm } from './game.js'
+
+const q = (qid, round, answer = 'ĐÁP ÁN') => ({ qid, season: '26', match: 'M1Q1', round, subject: 'X', question: `Câu ${qid}?`, answer })
+const rows = [
+  ...[1, 2, 3, 4].flatMap(p => [1, 2, 3, 4, 5, 6].map(i => q(`26-M1Q1-KD-A${p}.${i}`, 'KD'))),
+  ...Array.from({ length: 20 }, (_, i) => q(`26-M1Q1-KD-B.${i + 1}`, 'KD')),
+  ...[1, 2, 3, 4, 5].map(n => q(`26-M1Q1-VCNV-${n}`, 'VCNV', 'NGÔNNGỮ')),
+  ...[1, 2, 3, 4].flatMap(p => [1, 2, 3].map(i => q(`26-M1Q1-VD-${p}.${i}`, 'VD'))),
+]
+
+assert.deepEqual(parseCSV('a,b\n"x, ""y""","1\n2"\n'), [{ a: 'x, "y"', b: '1\n2' }])
+
+const pack = buildPack(rows, { match: '26-M1Q1', key: 'Bác Hồ' })
+assert.equal(pack.kd1[2][0].qid, '26-M1Q1-KD-A3.1')
+assert.equal(pack.kd2.length, 12)
+assert.equal(pack.vcnv.rows[4].qid, '26-M1Q1-VCNV-5')
+
+const s = newState('ABCDE')
+let t = 1000
+const A = a => act(s, a, t)
+for (const c of ['a', 'b', 'c']) assert.ok(A({ type: 'join', cid: c, name: c, want: 'player' }))
+assert.ok(!A({ type: 'join', cid: 'v', want: 'viewer' }))
+A({ type: 'pack', pack })
+
+// Khởi động riêng: không trừ điểm
+A({ type: 'round', round: 'kd1' })
+A({ type: 'show' }); A({ type: 'judge', ok: true }); A({ type: 'next' })
+A({ type: 'show' }); A({ type: 'judge', ok: false })
+assert.equal(s.slots[0].score, 10)
+assert.equal(view(s, 1).q.answer, 'ĐÁP ÁN')
+
+// Khởi động chung: sai −5, không âm; không ai bấm chuông 5s → hiện đáp án
+A({ type: 'round', round: 'kd2' })
+A({ type: 'show' })
+assert.equal(view(s, 1).q.answer, null)
+assert.ok(A({ type: 'buzz', slot: 1 }))
+assert.ok(!A({ type: 'buzz', slot: 2 }))
+A({ type: 'judge', ok: false })
+assert.equal(s.slots[1].score, 0)
+A({ type: 'next' }); A({ type: 'show' }); A({ type: 'timer' })
+t += 5000; A({ type: 'tick' })
+assert.ok(s.revealed)
+
+// VCNV: hàng ngang +10, CNV 60 sau hàng 1, sai bị loại
+A({ type: 'round', round: 'vcnv' })
+assert.ok(!A({ type: 'pick', row: 4 }))
+A({ type: 'pick', row: 0 })
+assert.equal(view(s, 0).sub.rows[0].answer, null)
+assert.equal(view(s, 0).sub.rows[0].len, 7)
+assert.equal(s.q.answer, 'NGÔNNGỮ')
+A({ type: 'answer', slot: 0, text: 'ngôn ngữ' }); A({ type: 'answer', slot: 1, text: 'sai' })
+assert.deepEqual(view(s, 1).sub.answers, { 1: 'sai' })
+A({ type: 'showAnswers' }); A({ type: 'rowDone' })
+assert.equal(s.slots[0].score, 20)
+assert.equal(view(s, 2).sub.rows[0].answer, 'NGÔNNGỮ')
+assert.equal(view(s, 2).sub.key, null)
+A({ type: 'cnv', slot: 2, text: 'x' }); A({ type: 'cnv', slot: 1, text: 'bác hồ' })
+assert.equal(view(s, 0).sub.cnv[0].text, null)
+A({ type: 'cnvJudge', slot: 2, ok: false })
+assert.ok(!A({ type: 'cnv', slot: 2, text: 'bác hồ' }))
+A({ type: 'cnvJudge', slot: 1, ok: true })
+assert.equal(s.slots[1].score, 60)
+assert.equal(view(s, 0).sub.key, 'Bác Hồ')
+
+// Về đích: người điểm cao nhất thi trước, ngôi sao x2, cướp điểm
+A({ type: 'round', round: 'vd' })
+assert.equal(s.sub.cur, 1)
+A({ type: 'val', i: 0, v: 30 }); A({ type: 'star', i: 0 })
+A({ type: 'show' }); A({ type: 'judge', ok: true })
+assert.equal(s.slots[1].score, 120)
+assert.ok(!A({ type: 'star', i: 1 }))
+A({ type: 'next' }); A({ type: 'show' }); A({ type: 'judge', ok: false })
+assert.ok(!A({ type: 'buzz', slot: 1 }))
+A({ type: 'buzz', slot: 0 }); A({ type: 'judge', ok: true })
+assert.equal(s.slots[0].score, 40)
+assert.equal(s.slots[1].score, 100)
+A({ type: 'next' }); A({ type: 'show' }); A({ type: 'judge', ok: false })
+A({ type: 'buzz', slot: 2 }); A({ type: 'judge', ok: false })
+assert.equal(s.slots[2].score, -10)
+A({ type: 'next' })
+assert.equal(s.sub.cur, 0)
+
+assert.equal(norm(' Hồ Chí Minh! '), 'HỒCHÍMINH')
+console.log('ok')
